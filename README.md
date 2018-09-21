@@ -1,5 +1,9 @@
 # Share
 实验室共享平台
+
+# MarkDown使用教程
+https://www.jianshu.com/p/191d1e21f7ed
+
 # http://ac.scmor.com/#userconsent#
 https://arxiv.org/
 
