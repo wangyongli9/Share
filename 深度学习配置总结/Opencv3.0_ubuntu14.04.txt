@@ -1,0 +1,30 @@
+ubuntu14.04安装opencv3.0.0
+1.安装依赖项
+直接编译安装opencv一般会报错，依赖工具需要先安装。
+$ sudo apt-get install build-essential cmake libopencv-dev libgtk2.0-dev pkg-config python-dev python-numpy
+2.下载opencv3(两个版本任选其一）
+$ mkdir ~/opencv
+$ cd ~/opencv
+
+$ wget https://github.com/Itseez/opencv/archive/3.0.0-alpha.zip -O opencv-3.0.0-alpha.zip
+$ unzip opencv-3.0.0-alpha.zip
+
+$ wget https://github.com/Itseez/opencv/archive/3.0.0-beta.zip
+$ unzip opencv-3.0.0-beta.zip
+
+$ cd opencv-3.0.0-alpha
+$ cd opencv-3.0.0-beta
+
+$ mkdir release
+$ cd release
+3.编译和安装
+$ cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D WITH_CUDA=OFF ..  //不关闭显卡会报错（-D WITH_CUDA=OFF）
+
+//遇到的错误：make[2]: *** 没有规则可以创建“lib/libfreenect2.so.0.2.0”需要的目标“/usr/lib/x86_64-linux-gnu/libGL.so”。 停止
+//解决办法： 先移除：sudo rm /usr/lib/x86_64-linux-gnu/libGL.so
+//再：sudo ln -s /usr/lib/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGL.so
+$ make -j       // make -j 多核处理器进行编译(默认的make只用一核,很慢)
+$ sudo make install
+4.配置环境变量
+$ sudo /bin/bash -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+$ sudo ldconfig

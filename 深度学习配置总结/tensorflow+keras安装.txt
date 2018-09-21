@@ -1,0 +1,40 @@
+这是没有安装anaconda参考：
+pip install --upgrade tensorflow      # for Python 2.7
+pip3 install --upgrade tensorflow     # for Python 3.n
+pip install --upgrade tensorflow-gpu  # for Python 2.7 and GPU
+pip3 install --upgrade tensorflow-gpu # for Python 3.n and GPU
+
+如果你想安装指定版本可以这样子：
+pip install tensorflow==1.4     # for Python 2.7 安装tensorflow1.4版本
+pip3 install tensorflow==1.4      # for Python 3.n 安装tensorflow1.4版本
+pip install tensorflow-gpu==1.4   # for Python 2.7 and GPU 安装tensorflow1.4版本
+pip3 install tensorflow-gpu==1.4  # for Python 3.n and GPU
+
+建议安装anaconda后再安装tensorflow，这样以后就不用很多依赖库烦恼了(本人亲身体会)
+
+清华大学的镜像网址:https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/
+
+windows:
+	下载anaconda3对应的Windows版，默认安装(python默认是python3,pip3)
+	tensorflow(CPU)安装：
+	pip install	tensorflow(pip install	tensorflow==1.3)
+	pip install keras
+
+ubuntu:
+	nvidia驱动安装：
+	深度学习（TensorFlow）环境搭建：（二）Ubuntu16.04+1080Ti显卡驱动
+	https://www.cnblogs.com/xuliangxing/p/7569946.html
+
+	深度学习（TensorFlow）环境搭建：（三）Ubuntu16.04+CUDA8.0+cuDNN7+Anaconda4.4+Python3.6+TensorFlow1.3：
+	https://www.cnblogs.com/xuliangxing/p/7575586.html
+	
+	ubuntu16.04 + CUDA8.0 + cudnn6.0 + anaconda3 + opencv3 + caffe:
+	https://blog.csdn.net/weixin_41018348/article/details/80628058
+	https://blog.csdn.net/weixin_40824648/article/details/80265943
+
+	
+	下载anaconda3对应的Linux版(python默认是python3,pip3)
+	bash Anaconda3-5.1.0-Linux-x86_64.sh(千万不要使用sudo bash)
+	tensorflow(GPU)安装：
+	pip install --upgrade	tensorflow-gpu(pip install tensorflow-gpu==1.3)
+	pip install keras

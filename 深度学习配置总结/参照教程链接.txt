@@ -1,0 +1,6 @@
+双硬盘SSD+HDD安装Ubuntu16.04服务器版教程
+https://blog.csdn.net/qq_30163461/article/details/80244755
+
+	
+Ubuntu16.04+Cuda9.1+Cudnn7.5+Anaconda3(Python3.6)+opencv3.4.1+caffe编译安装
+https://blog.csdn.net/weixin_40824648/article/details/80265943

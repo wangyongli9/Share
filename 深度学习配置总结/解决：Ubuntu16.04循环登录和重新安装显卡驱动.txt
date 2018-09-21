@@ -1,0 +1,65 @@
+https://www.jianshu.com/p/d45434f28ca0
+https://blog.csdn.net/gaowu959/article/details/79596724
+
+Ubuntu16.04 已经出现N次循环登录的问题了，每次都重装，这次实在受不了了，撸起袖子就是干啊！循环登录的原因 有很多，我目前对它的发作原理并不是特别清楚，所以本次解决方案仅作参考。
+出现N次循环登录的问题了，但是能够进入命令行模式，进入不了图形界面
+第一步进入命令行模式：
+Shift+F1(F1-F6都可以进入命令行模式）
+
+打印出根目录下.xsession_error，可以看到如下内容：
+
+openConnection: connect: 没有那个文件或目录
+cannot connect to brltty at :0
+upstart: gnome-session (Unity) main 进程 (3692)以状态 1 结束
+upstart: unity-settings-daemon main 进程 (3682)已经被TERM 信号杀死
+upstart: logrotate main 进程 (3531)已经被TERM 信号杀死
+upstart: bamfdaemon main 进程 (3611)已经被TERM 信号杀死
+upstart: hud main 进程 (3680)已经被TERM 信号杀死
+upstart: 从告知的D-Bus总线断开
+upstart: unity-panel-service main 进程 (3702)已经被TERM 信号杀死
+
+看了很多帖子，原因基本上都是显卡驱动的问题，所以我们的解决方案就是卸载显卡驱动，清理相关软件，安装显卡驱动。
+需要注意的是：安装显卡驱动推荐使用官方源的方式进行安装，不建议下载后离线安装！
+假如你还没有添加显卡驱动的软件源的话，使用如下方式进行安装：
+
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt-get update
+
+下面开始正文
+
+sudo apt-get remove --purge nvidia-*
+sudo apt-get autoremove #特别重要
+sudo apt-get install -f #特别重要
+sudo reboot
+
+重新启动后，进入命令控制台，安装显卡驱动：
+
+sudo apt-get install nvidia-378
+
+具体哪个驱动版本请去官网查询
+通过以上步骤我的问题得到解决
+另外还有一些同学通过使用nouveau模块来进入桌面，但治标不治本，终究还是需要显卡驱动。
+
+作者：izhangxm
+链接：https://www.jianshu.com/p/d45434f28ca0
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+Bubble:
+
+下面内容才是我经常使用的:
+
+进入linux的shell（ctrl + Alt + F1），输入用户名、密码，进入shell
+卸载NVIDIA驱动(我没有卸载，最好卸载重新安装):
+sudo apt-get remove --purge nvidia-*
+sudo apt-get autoremove
+或在NVIDIA驱动所在的目录，运行如下命令：
+sudo sh s./NVIDIshA-Linux-x86_64-xxx.run --uninstall
+
+重装NVIDIA驱动,解决问题根本之处在于添加参数： –no-opengl-files
+（进入你下载NVIDIA驱动路径下）
+sudo service lightdm stop
+sudo sh ./NVIDIA-Linux-x86_64-xxx.run --no-opengl-files
+(sudo sh ./NVIDIA.run -no-x-check -no-nouveau-check -no-opengl-files这句也可以不用)
+sudo service lightdm start

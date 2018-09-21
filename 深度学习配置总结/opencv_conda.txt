@@ -1,0 +1,36 @@
+
+1.安装依赖项
+直接编译安装opencv一般会报错，依赖工具需要先安装。
+$ sudo apt-get install build-essential cmake libopencv-dev libgtk2.0-dev pkg-config python-dev python-numpy
+
+
+2下载opencv并解压，在解压后的文件夹中
+
+mkdir build   #新建一个build文件夹，编译的工程都在这个文件夹里  
+cd build  
+
+3.在build文件夹下编译和安装
+cmake -D WITH_IPP=OFF -D PYTHON_DEFAULT_EXECUTABLE=~/anaconda3/bin/python3 -D BUILD_opencv_python3=ON -D BUILD_opencv_python2=OFF -D PYTHON3_EXCUTABLE=~/anaconda3/bin/python3 -D PYTHON3_INCLUDE_DIR=~/anaconda3/include/python3.6m -D PYTHON3_LIBRARY=~/anaconda3/lib/libpython3.6m.so.1.0 -D PYTHON_NUMPY_PATH=~/anaconda3/lib/python3.6/site-packages ..
+#记住按照自己anaconda3路径修改
+
+$ make -j       // make -j 多核处理器进行编译(默认的make只用一核,很慢)
+$ sudo make install
+4.配置环境变量
+$ sudo /bin/bash -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+$ sudo ldconfig
+
+
+5.最重要一步，否则import cv2会提示没有module
+
+编译完成后，把编译出来的cv2.cpython-36m-x86_64-linux-gnu.so库拷到anaconda的python库包下；其实不用sudo make install，opencv就已经可以用了，python的warpper都有。
+
+$ cp /home/weipeng/Downloads/opencv-3.3.0/build/lib/python3/* /home/weipeng/anaconda3/lib/python3.6/site-packages/
+
+
+
+6.测试
+终端输入python，import一下cv2
+
+
+
+
